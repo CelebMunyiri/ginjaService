@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class Claim {
 
     @Id

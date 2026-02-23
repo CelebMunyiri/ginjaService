@@ -1,10 +1,10 @@
 package com.ginja.claimsservice.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class WelcomeController {
@@ -18,6 +18,7 @@ public class WelcomeController {
         
         Map<String, String> endpoints = new HashMap<>();
         endpoints.put("POST /claims", "Create a new claim");
+        endpoints.put("GET /claims", "Get all claims");
         endpoints.put("GET /claims/{id}", "Get a claim by ID");
         response.put("endpoints", endpoints);
         

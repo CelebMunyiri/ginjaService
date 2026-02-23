@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  claims-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ginja-claims-service
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:claimsdb
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=
+      - LOGGING_LEVEL_ROOT=INFO
+      - LOGGING_LEVEL_COM_GINJA=DEBUG
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - ginja-network
+
+  # Optional: PostgreSQL database (uncomment to use instead of H2)
+  # postgres:
+  #   image: postgres:16-alpine
+  #   container_name: ginja-postgres
+  #   environment:
+  #     - POSTGRES_DB=claimsdb
+  #     - POSTGRES_USER=ginja
+  #     - POSTGRES_PASSWORD=ginja123
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     - ginja-network
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U ginja"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+networks:
+  ginja-network:
+    driver: bridge
+
+# volumes:
+#   postgres-data:
