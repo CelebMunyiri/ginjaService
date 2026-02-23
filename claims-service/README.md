@@ -193,7 +193,7 @@ Returns application health status (no authentication required).
 }
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Run Unit Tests
 ```bash
@@ -219,7 +219,7 @@ The project includes comprehensive unit tests for:
 
 ### Manual API Testing
 
-See `API_EXAMPLES.md` for:
+See The word document with screenshots a nd the API_EXAMPLES mardkdown file for:
 - cURL commands
 - Postman collection
 - Sample test scenarios
